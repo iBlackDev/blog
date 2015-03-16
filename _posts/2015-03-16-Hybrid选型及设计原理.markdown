@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Hybrid选型及设计原理"
+title:  "Hybrid选型及设计原理(转)"
 date:   2015-03-16 10:29:47
 categories: iOS
 ---
