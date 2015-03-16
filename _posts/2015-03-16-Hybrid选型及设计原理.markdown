@@ -1,0 +1,216 @@
+---
+layout: post
+title:  "Hybrid选型及设计原理"
+date:   2015-03-16 10:29:47
+categories: iOS
+---
+
+### 手机App方案
+
+#### WEB APP
+
+DEFINITION 定义
+
+> A web application or web app is any software that runs in a web browser. It is created in a browser-supported programming language (such as the combination of JavaScript, HTML and CSS) and relies on a web browser to render the application.
+Web applications are popular due to the ubiquity of web browsers, and the convenience of using a web browser as a client, sometimes called a thin client. The ability to update and maintain web applications without distributing and installing software on potentially thousands of client computers is a key reason for their popularity, as is the inherent support for cross-platform compatibility. Common web applications include webmail, online retail sales, online auctions, wikis and many other functions. --wiki
+
+在浏览器端构建的基于HTML/CSS/JS进行开发，使用浏览器进行渲染的应用程序。
+
+其特点体现在几个方面
+
+1. update and maintain web applications without distributing and installing software 升级和维护不需要分发和安装
+2. the inherent support for cross-platform compatibility 良好的跨平台性
+
+STORY 小故事
+
+> The full Safari engine is inside of iPhone. And so, you can write amazing Web 2.0 and Ajax apps that look exactly and behave exactly like apps on the iPhone. And these apps can integrate perfectly with iPhone services. They can make a call, they can send an email, they can look up a location on Google Maps. And guess what? There’s no SDK that you need! You’ve got everything you need if you know how to write apps using the most modern web standards to write amazing apps for the iPhone today. So developers, we think we’ve got a very sweet story for you. You can begin building your iPhone apps today. --Steve Jobs
+
+
+
+Jobs其实是最早的web app的倡导者之一，在当时的构想中是没有native app这种形式的，所有的app都是以web的形式存在的，但是当时的Jobs需要面对两个问题
+
+1. 移动网络根本无力承担这种变革
+2. 如何让webapp盈利
+3. webapp运行的体验非常糟糕
+
+而基于此的讨论和考虑才逐步衍生出后来的Native App和App Store
+
+[阅读](http://9to5mac.com/2011/10/21/jobs-original-vision-for-the-iphone-no-third-party-native-apps/)
+
+#### CASE STUDY 案例
+
+* [sun天气应用](http://pattern.dk/sun/)
+* [携程移动站点](http://m.ctrip.com/)
+
+#### Native App
+
+DIFINITION 定义
+
+> Apps are usually available through application distribution platforms, which began appearing in 2008 and are typically operated by the owner of the mobile operating system, such as the Apple App Store, Google Play, Windows Phone Store, and BlackBerry App World. Some apps are free, while others must be bought. Usually, they are downloaded from the platform to a target device, such as an iPhone, BlackBerry, Android phone or Windows Phone, but sometimes they can be downloaded to laptops or desktop computers. For apps with a price, generally a percentage, 20-30%, goes to the distribution provider (such as iTunes), and the rest goes to the producer of the app.1 The same app can therefore cost the average Smartphone user a different price depending on whether they use iPhone, Android, or BlackBerry 10 devices. --wiki
+
+基于手机操作系统的应用程序，使用其原生程序进行构建
+
+其特点体现在几个方面
+
+1. operated by the owner of the mobile operating system 在对应操作系统平台进行应用程序的开发
+2. available through application distribution platforms 需要分发应用(下载)的市场
+
+CASE STUDY 案例
+
+* [微信](http://weixin.qq.com/)
+
+#### HYBRID APP
+
+DEFINITION 定义
+
+> A hybrid mobile application (or hybrid mobile app) is a mobile application that runs inside of a native container and leverages the device’s web browser to display locally hosted HTML pages.[29] Hybrid mobile apps are composed mostly of HTML, JavaScript, and CSS. Device specific functionalities such as camera access, geolocation, and accelerometer readings are exposed through a JavaScript API. --wiki
+
+其特点体现在几个方面
+
+1. runs inside of a native container 运行在原生的容器内
+2. Device specific functionalities are exposed through a JavaScript API 通过JS API暴露底层的功能接口
+
+优缺点
+
+Pros
+
+* Hybrid mobile apps allow code reuse across platforms. Let the library or framework you are using take care of the platform specific differences and use the same JavaScript code on both platforms.
+* JavaScript is something that many developers are already familiar with where something like the iOS development tools are more specialized. It can be argued that there is less of a learning curve when developing hybrid mobile apps compared to native apps.
+* The app's interface and logic can be built and debugged in the web browser using an emulation framework. This could lower development costs depending on the tools required to develop native apps for the target platforms.
+* The HTML5 application development with CSS3 gives the compelling structure to the interface of game app and this ensures pleasing user-interface.
+
+Cons
+
+* Hybrid mobile apps are more susceptible to user interface lag due to the extra layers of abstraction.[29]
+Only a certain subset of native functionality is available which depends on the framework. All others native functions are accessible developing Plugins
+* As for native apps, the hybrid code base requires recompilation and resubmission to the distribution network where it is possible to instantly update a mobile web app’s codebase.
+
+* [HTML5 in mobile devices](http://en.wikipedia.org/wiki/HTML5_in_mobile_devices#Hybrid_Mobile_Apps)
+
+CASE STUDY 案例
+
+* [街旁](http://jiepang.com/)国内最早的Hybrid模式的倡导者
+* [应用HTML5搭建街旁新版混合式iOS客户端](http://www.infoq.com/cn/presentations/hybrid-html5-ios-client/)
+
+选择
+
+WEB APP, HYBRID APP & NATIVE APP 选择哪种形态？
+
+![](http://img.brightcove.com/app-cloud-infographic.jpg)
+
+codeWEB APP/code, codeHYBRID APP/code & codeNATIVE APP/code 选择哪种形态？
+
+
+* [Steve Jobs and Bill Gates discuss native vs. web apps](https://vimeo.com/25043022)
+* [What is a Hybrid Mobile App?](http://blogs.telerik.com/appbuilder/posts/12-06-14/what-is-a-hybrid-mobile-app-)
+* [Native, HTML5, or Hybrid: Understanding Your Mobile Application Development Options](https://developer.salesforce.com/page/Native,_HTML5,_or_Hybrid:_Understanding_Your_Mobile_Application_Development_Options)详细的功能和性能对比
+
+决定哪种模式之前需要问自己这些问题：
+
+1. App的体验和开发周期何者为先？
+2. APP的更新周期是否频繁？
+3. 开发资源
+4. 应用平台
+
+#### Hybrid App模型
+
+在native与web之间构建一层bridge, 将底层的接口映射到JS API上
+
+* [Anatomy of a Hybrid Mobile GIS Application](http://www.geospatialtraining.com/blog/index.php/anatomy-of-a-hybrid-mobile-gis-application/)
+
+![](http://www.geospatialtraining.com/blog/wp-content/uploads/2012/03/hybrid7.png)
+
+1. View的渲染依赖于浏览器自身的渲染引擎，即使游戏也不需要去写openGL
+2. Bridge在不同的平台通过不同的native层实现，在各自平台下完成编译
+3. Business可以实现在Web也可以实现在Native
+4. Plugin构成了Bridge的扩展
+
+现有平台
+
+* [Cordova](http://cordova.apache.org/)
+* [Ionic](http://ionicframework.com/)
+* [Phonegap](http://phonegap.com/)
+* [sencha](http://www.sencha.com/products/touch/)
+* [apicloud](http://www.apicloud.com/)
+* [appcan](http://www.appcan.cn/)
+
+案例
+
+* [ionic weather](https://github.com/driftyco/ionic-weather)
+
+使用js编写通用的业务逻辑，使用nodejs编译不同平台的native app
+
+* [Appcelerator Titanium Tutorial - Hello World With Titanium](http://randikastitaniumtutorial.blogspot.ae/2013/04/introduction-to-appcelerator-titanium_10.html)
+
+![](http://2.bp.blogspot.com/-ygGGcv475-w/UW6aOtEYVRI/AAAAAAAAAC0/8kf5c14zujs/s1600/archi.png)
+
+1. View通过Ti.UI进行调用Native实现，在不同的操作系统中调用不同的Native UI实现。Ti.UI可以定义部分Native UI
+2. Business通过JS编写最后编译成Native代码
+3. Bridge和Build工具进行了整合，理论上可以跨所有平台(meta programming?)
+
+* [Creating a basic layout in Titanium](http://www.learningtitanium.com/mobile-api/ios/creating-a-basic-page.html)
+
+现有平台
+
+* [React Native](http://www.infoq.com/cn/news/2015/02/react-native-facebook-javascript)：Facebook出品，可用JavaScript开发移动原生应用
+* [Titanium](http://www.appcelerator.com/)
+
+案例
+
+* [Sample.Todo](https://github.com/appcelerator-developer-relations/Sample.Todo)
+
+#### Hybrid App实现原理
+
+Titanium严格来说不属于Hybrid，因为其最终产生的仍然是Native App，过于牛B，不在本文知识范围内。本文限于讨论类似Cordova的Hybrid实现。
+
+Native调用JS
+
+![图片描述](http://segmentfault.com/img/bVk1jZ)
+
+1. native通过string调用js
+2. webview调用js解释器的eval方法将string转化为js方法
+3. webview调用js方法
+
+JS调用Native
+
+![图片描述](http://segmentfault.com/img/bVk1j0)
+
+1. javascript改变url，通过url传递调用的方法和参数
+2. webview监听到了URL变化，并且探测到url中定义的方法和参数
+3. 寻找对应的映射表，找到native对应接口api进行调用
+4. 执行javascript调用方法时传入的回调string并添加数据
+5. webview解析string转化为javascript进行调用
+
+URL Schemes
+
+为了区别普通的http访问的url与hybrid调用native的url，参考openurl的标准apple提出了url schema的方法
+
+* [About Apple URL Schemes](https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html)
+
+系统自定义了可以被识别的协议和url，例如
+
+* mailto:frank@wwdcdemo.example.com
+* tel:1-408-555-5555
+* sms:1-408-555-1212
+
+app自身可以自定义url schema，并且把自定义的url注册在调度中心， 例如
+
+* ctrip://wireless 打开携程App
+* weixin:// 打开微信
+
+阅读
+
++ [URL Scheme 统计](http://blog.csdn.net/u011043997/article/details/21242835)
+
+早期的Android采用了JavascriptInterface，但是这种方案存在注入的安全隐患，所以在Android 4.0以上的版本开始就支持了URL Schema方案
+
+Hybrid URL Schema在实现中的问题
+
+1. 存在短时间内高并发的问题，例如：一次定位没有完成期间，反复调用定位
+2. 执行http的url访问还没有返回就调用了url schema，导致了前一次行为没有生效
+3. 在ios中native调用js是实时的，在Android中native调用js是异步的，在异步调用中出现alert这种阻塞进程的会直接crash app
+
+针对Hybrid使用中出现的这些问题，cordova做了精致的封装。
+
+
+文章转自[leewind](http://segmentfault.com/blog/leewind/1190000002587623)
