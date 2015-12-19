@@ -1,38 +1,33 @@
-# Site settings
-title: iBlackDev
-email: guoyanhao2008@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://blog.iblackdev.com" # the base hostname & protocol for your site
-
-
-# Sidebar filter
-# Choose 'tag' or 'category' as filter in sidebar.
-filter: 'category'
-
-
-# Social account
-twitter:  iBlackDev
-weibo:    blackdev
-github:   iBlackDev
-# codepen:  username
-# dribbble: username
-
-
-# Comment
-# disqus_shortname: discussion_shortname
-
-
-# Google Analytics
-# google_analytics: tracking_ID
-
-
-# Build settings
+permalink: /:year/:month/:day/:title.html
 markdown: kramdown
-sass:
-  style: compressed
-# gems:
-#   - jekyll-sitemap
+highlighter: pygments
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: Guo Yanhao
+  email: guoyanhao2008@gmail.com
+  link: http://blog.iblackdev.com
+  weibo: http://weibo.com/iblackdev
+  github: http://github.com/iblackdev
+
+# 站点信息
+title: iBlackDev
+description: iBalackDev的博客
+url: http://blog.iblackdev.com
+rss_url: /pages/atom.xml
+
+# avatar头像及Favicon
+avatar: /assets/img/avatar.jpg
+favicon: 
+
+# google analytics 设置
+# ga:
+#   id: 
+#   url: 
+
+# disqus 设置
+# disqus:
+#   shortname: 
