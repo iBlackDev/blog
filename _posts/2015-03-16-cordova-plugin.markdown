@@ -3,6 +3,7 @@ layout: post
 title:  "Cordova Plugin"
 date:   2015-03-16 13:29:47
 categories: iOS
+tags: [技术]
 ---
 
 ## Cordova Plugin
