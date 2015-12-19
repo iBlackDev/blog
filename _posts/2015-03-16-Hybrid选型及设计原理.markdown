@@ -2,8 +2,8 @@
 layout: post
 title:  "Hybrid选型及设计原理(转)"
 date:   2015-03-16 10:29:47
-categories: iOS
-tags: [技术]
+categories: 技术
+tags: [iOS, android, hybrid]
 ---
 
 ### 手机App方案
