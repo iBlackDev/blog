@@ -14,7 +14,9 @@ A plugin is a package of injected code that allows the Cordova webview within wh
 ### 安装和使用
 
 #### 安装
+
     $ cordova plugin add xxx
+
 注：xxx可以是plugin ID或者plugin的git镜像地址，比如系统状态栏的plugin ID是org.apache.cordova.statusbar
     在git上面的镜像地址是https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 
