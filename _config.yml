@@ -29,5 +29,6 @@ favicon:
 #   url: 
 
 # disqus 设置
-# disqus:
-#   shortname: 
+disqus:
+  shortname: disqus_zhznhycnMe
+  
